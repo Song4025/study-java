@@ -13,6 +13,7 @@ public class BeanFactory {
     return instance;
   }
 
+  // 팩토리 메소드
   public Bus getBus(){
     return new Bus();
   }
