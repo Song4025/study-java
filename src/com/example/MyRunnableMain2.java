@@ -11,6 +11,7 @@ public class MyRunnableMain2 {
 //      }
 //    };
 
+//  사용 용도: 재사용하지 않을거같을때
     RunnableExecute runnableExecute = new RunnableExecute();
     System.out.println("람다를 사용할때는 메소드가 딱 하나만 있어야함.");
     runnableExecute.execute(() -> {
