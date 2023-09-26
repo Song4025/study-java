@@ -4,7 +4,7 @@ import java.lang.reflect.Method;
 
 public class ClassLoaderMain {
 
-  public static void main(String[] args) throws Exception {
+  public static void main(String[] args) throws MyException {
     // a라는 메소드가 있다.
     // 근데 클래스이름을 모르겠다.
     // 나중에 클래스 이름을 알려준다고 하니 일단. a()메소드가 실행되게 작성해라.
