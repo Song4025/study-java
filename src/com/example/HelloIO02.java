@@ -18,6 +18,11 @@ public class HelloIO02 {
 
         int i4 = in.read();
         System.out.println(i4); // 더이상 읽어들일 게 없음 -1 (파일의끝) EOF
+
+        int buf = -1;
+        while((buf = in.read()) != -1){
+            System.out.println(buf);
+        }
         in.close();
     }
 }
