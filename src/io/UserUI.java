@@ -2,6 +2,7 @@ package io;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Iterator;
 import java.util.List;
 
 public class UserUI {
@@ -17,6 +18,7 @@ public class UserUI {
         System.out.println("1. 회원등록");
         System.out.println("2. 회원 목록보기");
         System.out.println("3. 회원정보 수정하기");
+        System.out.println("4. 회원정보 삭제");
         System.out.println("5. 종료");
         int menuId = -1;
         try{
@@ -76,11 +78,11 @@ public class UserUI {
         }
     }
 
-    public void printUserList(List<User> users){
+    public void printUserList(Iterator<User> iter){
         System.out.println("email             이름         생년월일");
         System.out.println("========================================");
-        for(int i=0; i<users.size(); i++){
-            User user = users.get(i);
+        while(iter.hasNext()){
+            User user = iter.next();
             System.out.print(user.getEmail());
             System.out.print("  ");
             System.out.print(user.getName());

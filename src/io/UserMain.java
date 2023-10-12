@@ -6,38 +6,40 @@ public class UserMain {
     public static void main(String[] args) {
         UserUI userUI = new UserUI();
         UserDAO userDAO = new UserDAO("tmp/users.dat");
-        List<User> users =  userDAO.getUsers();
+        UserService userService = new UserServiceInMemory(userDAO.getUsers());
         while(true){
             int menuId = userUI.menu();
             if(menuId == 5){
                 System.out.println("종료합니다.");
-                userDAO.saveUser(users);
+                userDAO.saveUser(userService.getUsers());
                 break;
             } else if (menuId == 1) {
                 User user = userUI.regUser();
-                users.add(user);
+                userService.addUser(user);
                 System.out.println("등록되었습니다.");
             } else if (menuId == 2) {
-                userUI.printUserList(users);
+                userUI.printUserList(userService.getUsers());
             } else if (menuId == 3) {
                 String email = userUI.inputEmail();
-                int findIndex = -1;
-                for(int i = 0; i < users.size(); i++){
-                    User u = users.get(i);
-                    if(u.getEmail().equals(email)){
-                        findIndex = i;
-                        break;
-                    }
-                }
+                boolean siFindEmail = userService.exists(email);
+
                 // findIndex가 존재한다면?
-                if(findIndex != -1){
+                if(siFindEmail){
                     User updateUser = userUI.inputUser(email);
-                    // 기존에 있던 정보를 지운다.
-                    users.remove(findIndex);
-                    users.add(updateUser);
+                    userService.updateUser(updateUser);
                     System.out.println("수정되었습니다.");
                 }else { // 수정할 정보를 찾지 못했다면
                     System.out.println("수정할 정보가 없습니다.");
+                }
+            } else if (menuId == 4) {
+                String email = userUI.inputEmail();
+                boolean siFindEmail = userService.exists(email);
+                if(siFindEmail){
+                    userService.deleteUser(email);
+                    System.out.println("삭제하였습니다.");
+                }
+                else{
+                    System.out.println("삭제할 회원 정보가 없습니다.");
                 }
             }
         }
